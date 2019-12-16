@@ -1,0 +1,84 @@
+{% extends "geeks_app/home.html" %}
+{% block maincontent %}
+<div id="content">
+    <section>
+        <div class="section-header">
+            <ol class="breadcrumb">
+                <li><a href="{% url 'geeks_app:list_author' %}">Author</a></li>
+                <li class="active">List</li>
+            </ol>
+        </div>
+        <div class="section-body">
+            <div class="card">
+                <br>
+                <a class="btn ink-reaction btn-floating-action btn-primary pull-right"
+                   href="{% url 'geeks_app:create_author' %}" style="margin-right:20px;">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <br>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table  table-hover" id="detTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                     <th></th>
+                                    <th></th>
+
+
+                                    <th class="action_column">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for author in object_list %}
+                                <tr>
+                                    <td>{{ author.name }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a href="{% url 'geeks_app:detail_author' author.id %}"class="btn btn-default" title="Detail">
+                                        <i class="fa fa-eye" aria-hidden="true" ></i></a>
+                                        <a href="{% url 'geeks_app:update_author' author.id %}"
+                                           class="btn btn-primary" title="Edit">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href="{% url 'geeks_app:delete_author' author.id %}"
+                                           data-toggle="modal" data-target="#pfModal" class="btn btn-danger" title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="12">
+                                        <div class="alert alert-warning text-center">No records found</div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+        $(function(){
+            $('#detTable').DataTable();
+        });
+
+</script>
+{% endblock maincontent %}

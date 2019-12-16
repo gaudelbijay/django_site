@@ -1,0 +1,68 @@
+{% extends "geeks_app/home.html" %}
+{%load staticfiles %}
+
+
+{% block maincontent %}
+<div id="content">
+    <section>
+        <div class="section-header">
+            <ol class="breadcrumb">
+                <li><a href="{% url 'geeks_app:list_author' %}">Author</a></li>
+                <li class="active">Detail</li>
+                <div style="float:right">
+                    <a href="{% url 'geeks_app:update_author' object.id %}"
+                       class="btn btn-primary" title="Edit" style=" height:40px; width:40px;border-radius:40px;">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a href="{% url 'geeks_app:delete_author' object.id %}"
+                       data-toggle="modal" data-target="#pfModal" class="btn btn-danger round-btn" title="Delete" >
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </ol>
+        </div>
+        <div class="section-body">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-hover" id="detTable">
+
+
+
+                        <tbody>
+                        <tr>
+                            <td><b>Name:</b></td>
+                            <td>{{ object.name }}</td>
+                        </tr>
+                        {%if object.photo %}
+                        <tr>
+
+                            <td><b>Photo:</b></td>
+                            <td><img src="{{ object.photo.url }}" alt="image not found" style="padding-bottom:5px;max-height:300px;max-width:300px;"></td>
+
+                        </tr>
+                        {% endif %}
+
+                        <tr>
+                            <td><b>Description</b></td>
+                            <td>{{ object.description|safe }}</td>
+                        </tr>
+
+
+
+
+                        <tr>
+                            <td><b>Priority:</b></td>
+                            <td>{{ object.priority }}</td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock maincontent %}

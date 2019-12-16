@@ -1,0 +1,69 @@
+{% extends "geeks_app/home.html" %} {% block maincontent %}
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover" id="detTable">
+            <thead>
+                <tr>
+
+                    <th>
+                        <h1>post Title</h1>
+                    </th>
+                    <th class="action_column">Breaking Context</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in postdraft %} {%if post.publish%}
+                <tr>
+                    <td>{{ post.title }}</td>
+
+
+                    <td>
+                        <a href="{% url 'geeks_app:publishedpost_detail' post.id %}" class="btn btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+
+                        <a href="{% url 'geeks_app:publishedpost_update' post.id %}" class="btn btn-default">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+
+
+                            <a href="{% url 'geeks_app:publishedpost_delete' post.id %}" data-toggle="modal" data-target="#pfModal" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <form class="form" action="{% url 'geeks_app:publishedpost_update' post.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                                <div class="form-group">
+                                    <label class="text-bold">
+                                    </label>
+                                    <br> {{ form.publish}}
+
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" id="submit" class="btn btn-success" value="Save">
+                                    <a href="{% url 'geeks_app:postdraft_list' %}"> </a>
+                                </div>
+
+                            </form>
+                    </td>
+
+
+
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">
+                        <div class="alert alert-warning text-center">No records found</div>
+                    </td>
+                </tr>
+                {% endfor %}
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</div>
+{% endblock maincontent %}

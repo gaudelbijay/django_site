@@ -1,0 +1,62 @@
+{% extends 'geeks_app/frontend_geeks/base.html' %} {% load static %}{% load thumbnail %}
+{% block title %} CodeLogs {% endblock %}
+
+{% block body %}
+
+<!-- post --> 
+<section class="m-3 p-3">
+    <div class="container-fluid">
+         <div class="row">
+             <div class="col-md-2">
+                 <!-- advertisement -->
+             </div>
+             
+             <div class="col-md-6 my-3" style="border:solid 1px #efe9e9; border-radius:20px;">
+               <div class="container my-3" style="background-color: #ffffff;">
+                   <div class="row px-5 py-1 bg-dark" style="background-color: #212529; text-align:center; font-size: 13px; color: #ffffff; border:solid 2px #efe9e9;border-radius:5px;">
+                       <ul class="">
+                           <li class="px-4 py-3" style="display:inline;">{{post_object.author.name}}</li>
+                           <li class="px-4 py-3" style="display:inline">{{post_object.created_at}}</li>
+                           <li class="px-4 py-3" style="display:inline">{{post_object.category.name}}</li>
+                       </ul>
+                   </div>
+                   <div class="row my-3 px-3">
+                       <a href="{% url 'geeks_app:geeks_frontend:post_detail' post_object.id %}" style="text-decoration:none; color:#212529;"><h4>{{post_object.title}}</h4></a>
+                   </div>
+                    <div class="px-3 py-2"style="background-color: #ffffff;">
+                        <p style="font-family: 'PTSerif'; font-size: 1.3rem; color:#696969">
+                            {{post_object.content|safe}}
+                        </p>
+                    </div>
+               </div>
+             </div>
+             
+             <div class="col-md-4">
+                 <div class="row my-3">
+                     <div class="col-md-8" style="border:solid 1px #efe9e9; margin-left: 10px;">
+                       <div class="row px-3 py-1 mt-3 mb-1 bg-dark" style="color:#ffffff;">
+                           <h5 style="text-align:center;">Recent Articles</h5>
+                       </div>
+                       <div class="row py-3 px-3">
+                        {%for recent in mostrecentpost%}
+                        <div style="border-bottom:solid 1px white">
+                           <ul>
+                               <li"><a href="{% url 'geeks_app:geeks_frontend:post_detail' recent.id %}" style="text-decoration:none;color:#696969;"><h5>{{recent.title}}</h5></a></li>
+                           </ul>
+                        </div>
+                        {%endfor%}
+                       </div>
+                     </div>
+                 </div>
+                     <div class="col-md-4">
+                           <!-- advertisement -->
+                     </div>
+                 </div>
+
+             </div>
+         </div>
+    </div>
+</section>
+<!-- end post -->
+
+{%endblock%}

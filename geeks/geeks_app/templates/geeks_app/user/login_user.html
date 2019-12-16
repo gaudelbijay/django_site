@@ -1,0 +1,127 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin-Login</title>
+
+    <!-- BEGIN META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="your,keywords">
+    <meta name="description" content="Short explanation about this website">
+    <!-- END META -->
+
+    <!-- BEGIN STYLESHEETS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet'
+          type='text/css'/>
+    <link type="text/css" rel="stylesheet" href="{% static 'administration/css/theme-default/bootstrap.css' %}"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'administration/css/theme-default/materialadmin.css' %}"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'administration/css/theme-default/font-awesome.min.css' %}"/>
+    <link type="text/css" rel="stylesheet"
+          href="{% static 'administration/css/theme-default/material-design-iconic-font.min.css' %}"/>
+</head>
+
+<body class="menubar-hoverable header-fixed ">
+
+<!-- BEGIN LOGIN SECTION -->
+<section class="section-account">
+    <div class="spacer"></div>
+    <div class="card contain-sm style-transparent">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <br/>
+                    <span class="text-lg text-bold text-primary"> USER LOGIN</span> {% if error %}
+                    <h3 style="color: red;">Error: {{ error }}
+                        <br><br>
+                    </h3>
+                    {% endif %}
+                    <form class="form floating-label" action="" accept-charset="utf-8" method="post">{% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            {{ form.username }}
+
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            {{ form.password }}
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-primary btn-raised" type="submit">Login</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="pt-3">
+                        <a data-toggle="modal" data-target="#myModal" style="cursor:pointer;">
+                            <p type="submit">Forgot Password</p>
+                        </a>
+                    </div>
+
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Please provide your Email Address </h4>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        &times;
+                                    </button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <form method="post" action="{% url 'geeks_app:password_change' %}">
+                                    {% csrf_token %}
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+
+                                        <input type="email" class="form-control" name="email" placeholder="Enter you email address">
+                                    </div>
+
+                                    <button class="btn btn-success btn-block">Submit</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</section>
+
+<script src="{% static 'administration/js/libs/jquery/jquery-1.11.2.min.js' %}"></script>
+<script src="{% static 'administration/js/libs/jquery/jquery-migrate-1.2.1.min.js' %}"></script>
+<script src="{% static 'administration/js/libs/bootstrap/bootstrap.min.js' %}"></script>
+<script src="{% static 'administration/js/libs/spin.js/spin.min.js' %}"></script>
+<script src="{% static 'administration/js/libs/autosize/jquery.autosize.min.js' %}"></script>
+
+<script src="{% static 'administration/js/libs/nanoscroller/jquery.nanoscroller.min.js' %}"></script>
+<script src="{% static 'administration/js/core/source/App.js' %}"></script>
+
+<script src="{% static 'administration/js/core/source/AppNavigation.js' %}"></script>
+<script src="{% static 'administration/js/core/source/AppOffcanvas.js' %}"></script>
+<script src="{% static 'administration/js/core/source/AppCard.js' %}"></script>
+<script src="{% static 'administration/js/core/source/AppForm.js' %}"></script>
+<script src="{% static 'administration/js/core/source/AppNavSearch.js' %}"></script>
+<script src="{% static 'administration/js/core/source/AppVendor.js' %}"></script>
+<script src="{% static 'administration/js/core/demo/Demo.js' %}"></script>
+<!-- END JAVASCRIPT -->
+
+</body>
+
+</html>

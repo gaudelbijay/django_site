@@ -1,0 +1,67 @@
+{% extends "geeks_app/home.html" %}
+
+{% block maincontent %}
+<div id="content">
+    <section>
+
+        <div class="section-header">
+            <ol class="breadcrumb">
+                <li><a href="{% url 'geeks_app:user_list' %}">User</a></li>
+                <li class="active">Form</li>
+            </ol>
+        </div>
+        <div class="section-body">
+        <div class="">
+            <div class="card">
+                <div class="card-body">
+
+                {% if user_count or object.id %}
+                    <form class="form-horizontal" action="{% if object %}
+                        {% url 'geeks_app:user_update' object.id %}
+                        {% else %}{% url 'geeks_app:user_create' %}
+                        {% endif %}" method="POST">{% csrf_token %}
+
+{#                        <div class='form-group'>#}
+{#                                <label class="text-bold "><h4>Choose a postiion for the current User</h4></label><br>#}
+{#                                {{ form.groups }}#}
+{#                        </div>#}
+
+
+
+                        <div class='form-group'>
+                            <label class="text-bold"><h4>Firstname</h4></label><br>
+                            {{ form.first_name }}
+                        </div>
+
+
+                         <div class='form-group'>
+                            <label class="text-bold"><h4>Lastname</h4></label><br>
+                            {{ form.last_name}}
+                        </div>
+
+
+                        <div class='form-group'>
+                            <label class="text-bold"><h4>Email</h4></label><br>
+                            {{ form.email }}
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <input type="submit" id="submit" class="btn btn-success" value="Save">
+                            <a href="{% url 'geeks_app:user_list' %}" class="btn btn-primary">Cancel</a>
+                        </div>
+                    </form>
+                {% else %}
+                 <div class='form-group'>
+                     <label class="text-bold "><h2><strong>Maximum user reached.Please contact your customer support for further details.</strong></h2></label><br>
+
+                        </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+</div>
+{% endblock maincontent %}

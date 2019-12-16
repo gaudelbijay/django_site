@@ -1,0 +1,245 @@
+{% extends "geeks_app/base.html" %}
+{% load staticfiles %} 
+{% block content %}
+    <header id="header">
+        <div class="headerbar">
+            <div class="headerbar-left">
+                <ul class="header-nav header-nav-options">
+                    <li class="header-nav-brand">
+                        <div class="brand-holder">
+                            <a href="">
+                                <span class="text-lg text-bold text-primary"><a
+                                        href="{% url 'geeks_app:admin_homepage' %}">Admin Panel</a></span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="headerbar-right">
+                <ul class="header-nav header-nav-options">
+                    <li>
+                        <form class="navbar-search" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control borderline" name="headerSearch"
+                                       placeholder="Enter your keyword">
+                            </div>
+                            <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+                <!--end .header-nav-options -->
+                <ul class="header-nav header-nav-profile">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+                            <img src="{% static 'administration/img/avator1.jpeg' %}" alt=""/>
+                            <span class="profile-info">
+                            <strong>{{ user }}</strong>
+                            {% if request.user.is_superuser %}
+                            <small>Administrator</small>
+                                {% else %}
+                                <small>Staff</small>
+                                {% endif %}
+                        </span>
+                        </a>
+
+                        <ul class="dropdown-menu animation-dock">
+                            {% if request.user.is_superuser %}
+                                <li><a href="{% url 'geeks_app:admin_logout' %}" class="modal-box" data-toggle="modal"
+                                       data-target="#prixaModel"><i class="fa fa-fw fa-power-off text-danger"></i>
+                                    Logout</a></li>
+                            {% else %}
+                                <li><a href="{% url 'geeks_app:user_logout' %}" class="modal-box" data-toggle="modal"
+                                       data-target="#userlogoutModal"><i class="fa fa-fw fa-power-off text-danger"></i>
+                                    Logout</a></li>{% endif %}
+
+                        </ul>
+                        <!--end .dropdown-menu -->
+                    </li>
+                    <!--end .dropdown -->
+                </ul>
+                <!--end .header-nav-profile -->
+            </div>
+            <!--end #header-navbar-collapse -->
+        </div>
+    </header>
+    <!-- END HEADER-->
+
+    <!-- BEGIN BASE-->
+    <div id="base">
+        <div class="offcanvas">
+        </div>
+        {% block maincontent %}
+            <div id="content">
+                <section>
+                    <div class="section-header">
+                        <ol class="breadcrumb">
+                            <li class="active">Welcome to Admin Site</li>
+                        </ol>
+                    </div>
+                    <div class="container-fluid no-padding">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="{% static 'administration/img/geeks.png' %}" class="img-responsive">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        {% endblock maincontent %}
+        <div id="menubar" class="menubar-inverse " style="background: #2b323a;">
+            <div class="menubar-scroll-panel">
+                <ul id="main-menu" class="gui-controls">
+                    
+                    <!-- Degination Part -->
+
+                    <li class="{% if url_name == 'designation' %}
+                    active{% endif %}">
+                        <a href="{% url 'geeks_app:designation_list' %}">
+                            <div class="gui-icon">
+                                <i class="fa fa-wheelchair"></i>
+                            </div>
+                            <span class="title">Designation</span>
+                        </a>
+                    </li>
+
+                    <!-- Menu Part -->
+                    <li class="{% if url_name == 'menu' %}
+                active{% endif %}">
+                        <a href="{% url 'geeks_app:menu_list' %}">
+                            <div class="gui-icon">
+                                <i class="fa fa-list-alt"></i>
+                            </div>
+                            <span class="title">Menu</span>
+                        </a>
+                    </li>
+                    <!-- End of Menu Part -->
+
+
+
+                <!-- End of Designation -->
+
+
+                    <!-- Author Part -->
+
+                    <li class="{% if url_name == 'author' %}
+                    active{% endif %}">
+                        <a href="{% url 'geeks_app:list_author' %}">
+                            <div class="gui-icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            <span class="title">Author</span>
+                        </a>
+                    </li>
+
+                    <!-- End of Author Part -->
+
+
+                    <!-- Category Part -->
+                    <li class="{% if url_name == 'category' %}
+                    active{% endif %}">
+                        <a href="{% url 'geeks_app:category_list' %}">
+                            <div class="gui-icon">
+                                <i class="fa fa-list-ul"></i>
+                            </div>
+                            <span class="title">Category</span>
+                        </a>
+                    </li>
+                    <!-- End of Category Part -->
+
+
+                    <!--postPart-->
+                    <li class="{% if url_name == 'post' %}
+                    active{% endif %}">
+                        <a href="{% url 'geeks_app:post_list' %}">
+                            <div class="gui-icon">
+                                <i class="fa fa-book"></i>
+                            </div>
+                            <span class="title">Post</span>
+                        </a>
+                    </li>
+                    <!--end of postpart-->
+
+
+                    <!-- PostDraft Part -->
+                    <li class="{% if url_name == 'postdraft' %}
+                    active{% endif %}">
+                        <a href="{% url 'geeks_app:postdraft_list' %}">
+                            <div class="gui-icon">
+                                <i class="fa fa-newspaper-o"></i>
+                            </div>
+                            <span class="title">Post Draft &nbsp; <strong><button style="background-color: red;font-size: 12px;padding: 0px 6px;color: #ffffff;border-radius: 6px;box-shadow: 0px 4px 5px #a41515;">{{ post_draft }}</button></strong></span>
+                        </a>
+                    </li>
+                    <!-- End of Post Draft -->
+
+                    
+                    {% if request.user.is_superuser %}
+
+                    <li class="{% if url_name == 'publishedpost' %}
+                    active{% endif %}">
+                        <a href="{% url 'geeks_app:publishedpost_list' %}">
+                            <div class="gui-icon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <span class="title">published Post</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+
+                <!-- Newuser Part -->
+                {% if request.user.is_superuser %}
+
+                    <li class="{% if url_name == 'newuser' %}
+                    active{% endif %}">
+                        <a href="{% url 'geeks_app:user_list' %}">
+                            <div class="gui-icon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <span class="title">Create User</span>
+                        </a>
+                    </li>
+                {% endif %}
+                    <!-- End of Newuser Draft -->
+
+
+                <!-- Advertisement Part -->
+                      <li class="{% if url_name == 'advertisement' %}
+                      active{% endif %}">
+                          <a href="{% url 'geeks_app:list_advertisement' %}">
+                              <div class="gui-icon">
+                                  <i class="fa fa-buysellads"></i>
+                              </div>
+                              <span class="title">Advertisement</span>
+                          </a>
+                      </li>
+                      <!-- End of Advertisement -->
+
+                </ul>
+                <div class="menubar-foot-panel">
+                    <small class="no-linebreak hidden-folded">
+                        <span class="opacity-75">Powered By:</span> <a
+                            href="https://geeks.com/" target="_blank"><img
+                            src="{% static 'administration/img/admin-geeks-logo.png' %}?v=1.0.1" height="30px;"
+                            width="120px;"></a>
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $('body').on('hidden.bs.modal', '.modal', function () {
+            location.reload();
+            $(this).removeData('bs.modal');
+        });
+    </script>
+{% endblock %}

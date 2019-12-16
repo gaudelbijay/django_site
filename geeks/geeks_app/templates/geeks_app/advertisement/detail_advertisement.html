@@ -1,0 +1,110 @@
+{% extends "geeks_app/home.html" %}
+{% load staticfiles %}
+{% load custom_tags %}
+
+
+{% block maincontent %}
+
+    <div id="content">
+        <section>
+            <div class="section-header">
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'geeks_app:news_list' %}">Advertisement</a></li>
+                    <li class="active">Detail</li>
+                    <div style=" float:right;">
+                    <a href="{% url 'geeks_app:update_advertisement' object.id %}"
+                       class="btn btn-primary" title="Edit" style=" height:40px; width:40px;border-radius:40px;">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a href="{% url 'geeks_app:delete_advertisement' object.id %}"
+                       data-toggle="modal" data-target="#pfModal" class="btn btn-danger" title="Delete"
+                       style=" height:40px; width:40px;border-radius:40px;">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+                </ol>
+            </div>
+            <div class="section-body">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped table-hover" id="detTable">
+
+
+                            <tbody>
+                            <tr>
+                                <td><b>Title:</b></td>
+                                <td>{{ object.title }}</td>
+                            </tr>
+
+
+
+
+                            {% if object.place1 %}
+                                <tr>
+
+                                    <td><b>Place1:</b></td>
+                                    <td><img src="{{ object.place1.url }}" alt="image not found"
+                                             style="padding-bottom:5px;max-height:300px;max-width:300px;"><br>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% if object.place2 %}
+                                <tr>
+
+                                    <td><b>Place1:</b></td>
+                                    <td><img src="{{ object.place2.url }}" alt="image not found"
+                                             style="padding-bottom:5px;max-height:300px;max-width:300px;"><br>
+                                    </td>
+                                </tr>
+                            {% endif %}
+
+
+                            <tr>
+
+                                <td><b>Ad_Type:</b></td>
+                                <td>{{ object.ad_type|get_Adtype }}</td>
+
+                            </tr>
+                            <tr>
+                                <td><b>Url:</b></td>
+                                <td>{{ object.url }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Is Enabled</b></td>
+                                <td>{{ object.is_enabled }}</td>
+                            </tr>
+                            <tr>
+                            <td><b>Priority:</b></td>
+                            <td>{{ object.priority }}</td>
+                        </tr>
+                            <tr>
+                                <td><b>Expiring Date:</b></td>
+                                <td>{{ object.expired_at }} and {{ object.created_at }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>This Ad Expires in </b></td>
+                                <td>{% if object.expired_at > object.created_at %}
+                                    {{ object.expired_at | getExpiredDate:object.created_at }} Days
+                                    {% else %}
+                                    Expired !!
+
+                                        
+
+
+
+                                {% endif %}
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock maincontent %}
