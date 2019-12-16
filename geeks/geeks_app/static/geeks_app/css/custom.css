@@ -1,0 +1,17 @@
+.descriptionfield{
+border-radius:2px;width:100%;
+border:1px #D5D5D5 solid;
+}
+.borderline{
+max-width:200px;
+border:1px #D5D5D5 solid;
+}
+.title{
+    font-weight:bold;
+    color:#000000;
+}
+.round-btn{
+height:40px;
+width:40px;
+border-radius:40px;
+}
